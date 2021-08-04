@@ -1,0 +1,398 @@
+\documentclass[11pt]{homework}
+\usepackage{rotating}
+\usepackage{quiver}
+\title{Compact Lie Groups}
+\author{Tao Huang}
+\email{me@tau.ovh}
+
+\begin{document}
+    
+\maketitle
+
+\section*{Pre-knowledge}
+
+\begin{definition}
+    Let $B$ be connected space with base point $b_0\in B$.
+    The continuous map $\pi : E \rightarrow B$ is a \textit{fiber bundle (locally trivial fibration)} with fiber $F$ if it satisfies the following properties:
+    \begin{enumerate}
+        \item $\pi^{-1}(b_0) = F$.
+        \item $\pi$ is surjective.
+        \item For every point $x\in B$ there is an open neighborhood $U_x \subset B$ and a "fiber preserving homeomorphism" $\Psi_{U_{x}}: \pi^{-1}\left(U_{x}\right) \rightarrow U_{x} \times F$, that is a homeomorphism making the following diagram commute:
+        \[\begin{tikzcd}
+            {\pi^{-1}(U_x)} && {U_x \times F} \\
+            \\
+            {U_x} && {}
+            \arrow["\pi", from=1-1, to=3-1]
+            \arrow["{\Psi_{U_{x}}}"', from=1-1, to=1-3]
+            \arrow["{proj_1}", from=1-3, to=3-1]
+        \end{tikzcd}\]
+    \end{enumerate}
+\end{definition}
+
+\begin{definition}
+    A \textit{covering space} is a fiber bundle s.t. the bundle projection $\pi$ is a local homeomorphism. It follows that the fiber is a discrete space. If the fiber has exactly two elements, it's a \textit{double cover}.
+\end{definition}
+
+\begin{definition}
+    A \textit{local section} of a fiber bundle is a continuous map $\sigma : U \rightarrow E$ where $U$ is an open subset of $B$ and
+    \begin{equation*}
+        \pi(\sigma(x)) = x \quad \forall x \in U.
+    \end{equation*}
+\end{definition}
+
+\begin{definition}
+    For a space $X$, define \textit{n-th homotopy group} $\pi_n(X)$ to be the group of homotopy classes of maps $g:[0,1]^{n}\to X$ from the n-cube to $X$ that take the boundary of the n-cube to $b$.
+\end{definition}
+
+\section*{Basic Notions}
+
+\begin{definition}
+    A \textit{Lie group} $G$ is a group and a manifold so that
+    \begin{enumerate}
+        \item the \textit{multiplication} map $\mu: G \times G \rightarrow G$ given by $\mu\left(g, g^{\prime}\right)=g g^{\prime}$ is smooth and
+        \item the \textit{inverse} $\operatorname{map} \iota: G \rightarrow G$ by $\iota(g)=g^{-1}$ is smooth.
+    \end{enumerate}
+\end{definition}
+
+\begin{definition}
+    Let $G$ be a matrix Lie group. The \textit{Lie algebra} of $G$, denoted $\mathfrak{g}$, is the set of all matrices $X$ such that $e^{t X}$ is in $G$ for all real numbers $t$.
+\end{definition}
+
+\begin{definition}
+    A \textit{Lie subgroup} $H$ of a Lie group $G$ is the image in $G$ of a Lie group $H^{\prime}$ under an injective immersive homomorphism $\varphi: H^{\prime} \rightarrow G$ together with the Lie group structure on $H$ making $\varphi: H^{\prime} \rightarrow H$ a diffeomorphism.
+\end{definition}
+
+\begin{theorem}
+    Let $G$ be a Lie group and $H \subseteq G$ a subgroup (with no manifold assumption). Then $\mathrm{H}$ is a \textbf{regular} Lie subgroup if and only if $\mathrm{H}$ is \textbf{closed}.
+\end{theorem}
+
+\begin{theorem}
+    Let $H$ be a closed subgroup of a Lie group $G .$ Then there is a unique manifold structure on the quotient space $G / H$ so the projection map $\pi: G \rightarrow G / H$ is smooth, and so there exist local smooth sections of $G / H$ into $G$.
+\end{theorem}
+
+\begin{definition}
+    A \textit{homomorphism} of Lie groups is a smooth homomorphism between two Lie groups.
+\end{definition}
+
+\begin{theorem}
+    If $G$ and $G^{\prime}$ are Lie groups and $\varphi: G \rightarrow G^{\prime}$ is a homomorphism of Lie groups, then $\varphi$ has constant rank and ker $\varphi$ is a (closed) regular Lie subgroup of $G$ of dimension $\operatorname{dim} G-\operatorname{rk} \varphi$ where $\mathrm{rk} \varphi$ is the rank of the differential of $\varphi .$
+    \label{thm:rank}
+\end{theorem}
+
+
+
+\begin{sidewaystable}
+    \centering
+    \bgroup
+    \def\arraystretch{1.5}
+    \begin{tabular}{c|c|c|c|c|c}
+    Lie Group & Name & Definition & C & SC & Lie Algebra \\ \hline
+    $O(n)$ & orthogonal group & $\{g \in GL(n,\mathbb{R}) \mid g^tg=I\}$ & $\mathbb{Z}_2$ & & $\mathfrak{so}(n) = \{X \in \mathfrak{o}(n) \mid X^t + X = 0, \operatorname{tr} X = 0\}$ \\
+    $SO(n)$ & special orthogonal group & $\{g \in O(n) \mid \det g = 1\}$ & Y & $\begin{aligned} \mathbb{Z} \; (n=2) \\ \mathbb{Z}_2 \; (n>2) \end{aligned}$ & $\mathfrak{so}(n)$ \\ 
+    $U(n)$ & unitary group & $\{g \in GL(n,\mathbb{C}) \mid g^\star g=I\}$ & Y & $\mathbb{Z}$ & $\mathfrak{u}(n) = \{X \in M_n(\mathbb{C}) \mid X^\star + X = 0\}$ \\ 
+    $SU(n)$ & special unitary group & $\{g \in U(n) \mid \det g = 1\}$ & Y & Y & $\mathfrak{su}(n) = \{X \in \mathfrak{u}(n) \mid \operatorname{tr} X = 0\}$ \\ 
+    $Sp(n)$ & (compact) symplectic group & $\{g \in GL(n,\mathbb{H}) \mid g^\star g=I\}$ & Y & Y & $\mathfrak{sp}(n) = \{X \in M_n(\mathbb{H}) \mid X^\star + X = 0\}$ \\ 
+    $Spin(n)$ & spin group &  & Y ($n>1$) & Y ($n>2$) & $\mathfrak{so}(n)$ 
+    \end{tabular}
+    \egroup
+    \caption{Table of Compact Classical Lie Groups \cite{TableofL43:online}}
+    
+\end{sidewaystable}
+
+
+\begin{proposition}
+    The compact symplectic group
+    \begin{equation*}
+        Sp(n) = \{g \in GL(n,\mathbb{H}) \mid g^\star g=I\}
+    \end{equation*}
+    is isomorphic to 
+    \begin{equation*}
+        Sp(n;\mathbb{C}) \cap U(2n),
+    \end{equation*}
+    where $Sp(n;\mathbb{C}) = \{g \in GL(2n;\mathbb{C}) \mid g^t \Omega g = \Omega\}$ is the symplectic group and 
+    \begin{equation*}
+        \Omega = \begin{pmatrix}
+            0 & -I_n \\ I_n & 0
+        \end{pmatrix}.
+    \end{equation*}
+\end{proposition}
+
+\begin{remark}
+    Consider $\mathbb{C}$-linear isomorphism
+    \begin{align*}
+        \vartheta : \mathbb{H}^n & \rightarrow \mathbb{C}^{2n} \\
+        a + j b & \mapsto (a, b),
+    \end{align*}
+    which induces a $\mathbb{C}$-linear isomorphism
+    \begin{equation*}
+        \tilde{\vartheta} : M_n (\mathbb{H}) \rightarrow M_{2n}(\mathbb{C}),
+    \end{equation*}
+    s.t.
+    \begin{equation*}
+        \tilde{\vartheta} X = \vartheta \circ X \circ \vartheta^{-1} \quad (\forall X \in M_n (\mathbb{H})).
+    \end{equation*}
+
+    In fact, 
+    \begin{equation*}
+        \tilde{\vartheta}(A + jB) = \begin{pmatrix}
+            A & - \bar{B} \\ B & \bar{A}
+        \end{pmatrix}.
+    \end{equation*}
+\end{remark}
+
+\section*{Topology}
+
+\begin{definition}
+    If $G$ is a Lie group, write $G^{0}$ for the connected component of $G$ containing $e$.
+\end{definition}
+
+\begin{lemma}
+    Let $G$ be a Lie group. The connected component $G^{0}$ is a regular Lie subgroup of $G .$ If $G^{1}$ is any connected component of $G$ with $g_{1} \in G^{1}$, then $G^{1}=$ $g_{1} G^{0}$.
+\end{lemma}
+
+\begin{theorem}
+    If $G$ is a Lie group and $H$ a connected Lie subgroup so that $G / H$ is also connected, then $G$ is connected.
+\end{theorem}
+
+% \begin{proof}
+%     Since $H$ is connected and contains $e, H \subseteq G^{0}$, so there is a continuous map $\pi: G / H \rightarrow G / G^{0}$ defined by $\pi(g H)=g G^{0} .$ It is trivial that $G / G^{0}$ has the discrete topology with respect to the quotient topology. The assumption that $G / H$ is connected forces $\pi(G / H)$ to be connected, and so $\pi(G / H)=e G^{0} .$ However, $\pi$ is a surjective map so $G / G^{0}=e G^{0}$, which means $G=G^{0}$.
+% \end{proof}
+
+\begin{definition}
+    Let be $G$ a Lie group and $M$ a manifold.
+    \begin{enumerate}
+        \item An \textit{action} of $G$ on $M$ is a smooth map from $G \times M \rightarrow M$, denoted by $(g, m) \rightarrow$ $g \cdot m$ for $g \in G$ and $m \in M$, so that:
+        \begin{enumerate}
+            \item $e \cdot m=m$, all $m \in M$ and
+            \item $g_{1} \cdot\left(g_{2} \cdot m\right)=\left(g_{1} g_{2}\right) \cdot m$ for all $g_{1}, g_{2} \in G$ and $m \in M$.
+        \end{enumerate}
+        \item  The action is called \textit{transitive} if for each $m, n \in M$, there is a $g \in G$, so $g \cdot m=n$.
+        \item The \textit{stabilizer} of $m \in M$ is $G^{m}=\{g \in G \mid g \cdot m=m\}$.
+    \end{enumerate}
+\end{definition}
+
+\begin{theorem}
+    The compact classical groups, $SO(n), SU(n)$, and $Sp(n)$, are connected.
+\end{theorem}
+
+\begin{remark}
+    \begin{align*}
+        \{1\} \rightarrow SO(n-1) \rightarrow SO(n) \rightarrow S^{n-1} \rightarrow \{1\},\\
+        \{1\} \rightarrow SU(n-1) \rightarrow SU(n) \rightarrow S^{2n-1} \rightarrow \{1\}\\
+        \{1\} \rightarrow Sp(n-1) \rightarrow Sp(n) \rightarrow S^{4n-1} \rightarrow \{1\}
+    \end{align*}
+\end{remark}
+
+\begin{definition}
+    The Lie group $G$ is called \textit{simply connected} if it's fundamental group $\pi_1 (G)$ is trivial.
+\end{definition}
+
+\begin{lemma}
+    If $H$ is a discrete normal subgroup of a connected Lie group $G$, then $H$ is contained in the center of $G$.
+\end{lemma}
+
+\begin{theorem}
+    Let $G$ be a connected Lie group.
+    \begin{enumerate}
+        \item The connected simply connected cover $\widetilde{G}$ is a Lie group.
+        \item If $\pi$ is the covering map and $\widetilde{Z}=\operatorname{ker} \pi$, then $\widetilde{Z}$ is a discrete central subgroup of $\widetilde{G}$
+        \item $\pi$ induces a diffeomorphic isomorphism $G \cong \widetilde{G} / \widetilde{Z}$.
+        \item $\pi_{1}(G) \cong \widetilde{Z}$.
+    \end{enumerate}
+\end{theorem}
+
+\begin{lemma}
+    $Sp(1)$ and $SU(2)$ are simply connected and isomorphic to each other. Either group is the simply connected cover of $S O(3)$, i.e., $S O(3)$ is isomorphic to $\operatorname{Sp}(1) /\{\pm 1\}$ or $S U(2) /\{\pm I\}$
+\end{lemma}
+
+\begin{remark}
+    Consider the 3-dimensional vector space 
+    \begin{equation*}
+        V = \left\{\begin{pmatrix}
+            x_1 & x_2 + i x_3 \\
+            x_2 - i x_2 & x_1
+        \end{pmatrix} \mid x_1, x_2, x_3 \in \mathbb{R} \right\} = \mathfrak{su(2)},
+    \end{equation*}
+    with inner product 
+    \begin{equation*}
+        \langle X_1, X_2 \rangle = \frac{1}{2} \operatorname{trace} (X_1 X_2) = x_1 x_1^\prime + x_2 x_2^\prime + x_2 x_2^\prime.
+    \end{equation*}
+
+    As vector space $V \cong \mathbb{R}^3$.
+    Let $\Phi : SU(2) \rightarrow \operatorname{End}(V) \cong GL(3 ; \mathbb{R})$ by setting 
+    \begin{equation*}
+        \Phi_U (X) = U X U^{-1} \quad (\forall U \in SU(2)).
+    \end{equation*}
+
+    Since $\langle \Phi_U (X_1), \Phi_U (X_2) \rangle = \langle X_1, X_2 \rangle$, $\Phi_U \in SO(3)$.
+\end{remark}
+
+
+\begin{theorem}
+    \begin{enumerate}
+        \item $\pi_{1}(S O(2)) \cong \mathbb{Z}$ and $\pi_{1}(S O(n)) \cong \mathbb{Z} / 2 \mathbb{Z}$ for $n \geq 3$.
+        \item $S U(n)$ is simply connected for $n \geq 2$.
+        \item $\operatorname{Sp}(n)$ is simply connected for $n \geq 1$.
+    \end{enumerate}
+\end{theorem}
+
+\begin{remark}
+    Use the long exact sequence of higher homotopy groups.
+\end{remark}
+
+\section*{Clifford Algebras}
+
+\begin{definition}
+
+    The \textit{Clifford algebra} is
+    \begin{equation*}
+        \mathcal{C} (\mathbb{R}^n, Q) = \left. \mathcal{T}_{n}(\mathbb{R}) \right/ \mathcal{I}
+    \end{equation*}
+    where $\mathcal{T}_{n}(\mathbb{R}) = \bigoplus_{k=0}^{\infty} \bigotimes^k \mathbb{R}^{n} $ and $\mathcal{I}$ is the ideal of $\mathcal{T}_{n}(\mathbb{R})$ generated by
+    \begin{equation*}
+        \left\{\left(x \otimes x - Q(x)1\right) \mid x \in \mathbb{R}^{n}\right\},
+    \end{equation*}
+    and $Q: \mathbb{R}^{n} \rightarrow \mathbb{R}$ is a quadratic form over $\mathbb{R}^{n}$.
+\end{definition}
+
+\begin{remark}
+    To remove multiple copies of basis for $\mathbb{R}^n$, 
+    \begin{align*}
+        x \otimes y + y \otimes x &= (x + y)\otimes(x + y) - x \otimes x - y \otimes y \\
+        &= Q(x + y) - Q(x) - Q(y).
+    \end{align*}
+\end{remark}
+
+\begin{remark}
+    Let $Q(v) = - |v|^2 \; (\forall v \in \mathbb{R}^n)$, then $x \otimes y + y \otimes x = -2 (x,y)$. For $\mathcal{C}_n(\mathbb{R}) \vcentcolon = \mathcal{C} (\mathbb{R}^n, - |\cdot|^2)$
+    \begin{equation*}
+        \mathcal{C}_0 (\mathbb{R}) = \mathbb{R}, \quad \mathcal{C}_1 (\mathbb{R}) = \mathbb{C}, \quad \mathcal{C}_2 (\mathbb{R}) = \mathbb{H}.
+    \end{equation*}
+\end{remark}
+
+\begin{remark}
+    If $Q = 0$ then the Clifford algebra is just the exterior algebra $\bigwedge \mathbb{R}^n$.
+\end{remark}
+
+\begin{proposition}
+    There is a linear isomorphism $\Psi : \mathcal{C}_n (\mathbb{R}) \rightarrow \bigwedge \mathbb{R}^n$.
+\end{proposition}
+
+\begin{remark}
+    \begin{align*}
+        \epsilon (x) (y) &= x \wedge y, \\
+        \iota (x) (y_1 \wedge \cdots y_k) &= \sum_{i=1}^k (-1)^{i+1} (x, y_i) \; y_1 \wedge \cdots \wedge \hat{y_i} \wedge \cdots \wedge y_k,
+    \end{align*}
+    where $\hat{y_i}$ means to omit the term.
+
+    Let $L_x = \epsilon (x) + \iota (x)$, $\Phi : \mathcal{T}_{n}(\mathbb{R}) \rightarrow \operatorname{End}(\mathbb{R}^n)$ by setting $\Phi(x) = L_x$, which induces $\Phi : \mathcal{C}_n (\mathbb{R}) \rightarrow \operatorname{End}(\mathbb{R}^n)$ since $\Phi(\mathcal{I}) = 0$.
+
+    Let
+    \begin{equation*}
+        \Psi (v) = \Phi(v)(1),
+    \end{equation*}
+    then
+    \begin{equation*}
+        \Psi (x_1 \cdots x_k) = x_1 \wedge \cdots \wedge x_k + \text{ terms in } \bigoplus_{i\geq 1} \left .\bigwedge \right.^{k-2i} \mathbb{R}^n.
+    \end{equation*}
+\end{remark}
+
+\begin{remark}
+    A basis of $\mathcal{C}_n (\mathbb{R})$ is then 
+    \begin{equation*}
+        \{1\} \cup \{e_{i_1}e_{i_2} \cdots e_{i_k} \mid 1 \leq i_1 < i_2 < \cdots < i_k \leq n\},
+    \end{equation*}
+    where $\{e_1, e_2 , \cdots , e_n\}$ is the standard basis of $\mathbb{R}^n$.
+\end{remark}
+
+\section*{$\mathrm{Spin}_n(\mathbb{R})$}
+
+\begin{definition}
+    \begin{enumerate}
+        \item Let $\mathcal{C}_{n}^{+}(\mathbb{R})$ be the subalgebra of $\mathcal{C}_{n}(\mathbb{R})$ spanned by all products of an even number of elements of $\mathbb{R}^{n}$.
+        \item Let $\mathcal{C}_{n}^{-}(\mathbb{R})$ be the subspace of $\mathcal{C}_{n}(\mathbb{R})$ spanned by all products of an odd number of elements of $\mathbb{R}^{n}$ so $\mathcal{C}_{n}(\mathbb{R})=\mathcal{C}_{n}^{+}(\mathbb{R}) \oplus \mathcal{C}_{n}^{-}(\mathbb{R})$ as a vector space.
+        \item Let the automorphism $\alpha$, called the \textit{main involution}, of $\mathcal{C}_{n}(\mathbb{R})$ act as multiplication by $\pm 1$ on $\mathcal{C}_{n}^{\pm}(\mathbb{R})$
+        \item \textit{Conjugation}, an anti-involution on $\mathcal{C}_{n}(\mathbb{R})$, is defined by
+        \begin{equation*}
+            \left(x_{1} x_{2} \cdots x_{k}\right)^{*}=(-1)^{k} x_{k} \cdots x_{2} x_{1}
+        \end{equation*}
+        for $x_{i} \in \mathbb{R}^{n}$.
+    \end{enumerate}
+\end{definition}
+
+\begin{definition}
+    \begin{enumerate}
+        \item Let $\operatorname{Spin}_{n}(\mathbb{R})=\left\{g \in \mathcal{C}_{n}^{+}(\mathbb{R}) \mid g g^{*}=1\right.$ and $g x g^{*} \in \mathbb{R}^{n}$ for all $\left.x \in \mathbb{R}^{n}\right\}$.
+        \item Let $\operatorname{Pin}_{n}(\mathbb{R})=\left\{g \in \mathcal{C}_{n}(\mathbb{R}) \mid g g^{*}=1\right.$ and $\alpha(g) x g^{*} \in \mathbb{R}^{n}$ for all $\left.x \in \mathbb{R}^{n}\right\}$. Note $\operatorname{Spin}_{n}(\mathbb{R}) \subseteq \operatorname{Pin}_{n}(\mathbb{R})$.
+        \item For $g \in \operatorname{Pin}_{n}(\mathbb{R})$ and $x \in \mathbb{R}^{n}$, define the homomorphism $\mathcal{A}: \operatorname{Pin}_{n}(\mathbb{R}) \rightarrow G L(n, \mathbb{R})$ by $(\mathcal{A g}) x=\alpha(g) x g^{*}$. Note $(\mathcal{A} g) x=g x g^{*}$ when $g \in \operatorname{Spin}_{n}(\mathbb{R})$.
+    \end{enumerate}
+\end{definition}
+
+\begin{lemma}
+    $\mathcal{A}$ is a covering map of $\operatorname{Pin}_{n}(\mathbb{R})$ onto $O(n)$ with $\operatorname{ker} \mathcal{A}=\{\pm 1\}$, so there is an exact sequence
+    \begin{equation*}
+        \{1\} \rightarrow\{\pm 1\} \rightarrow \operatorname{Pin}_{n}(\mathbb{R}) \stackrel{\mathcal{A}}{\rightarrow} O(n) \rightarrow\{I\}
+    \end{equation*}
+\end{lemma}
+
+\begin{remark}
+    Outline of proof: 
+    \begin{enumerate}
+        \item $\mathcal{A} g \in O(n)$.
+        \item $\mathcal{A}$ maps $\operatorname{Pin}_{n}$ onto $O(n)$.
+        \item $\ker \mathcal{A} = \{\pm 1\}$.
+        \item $\mathcal{A}$ is a covering map. (by theorem \ref{thm:rank}).
+    \end{enumerate}
+\end{remark}
+
+\begin{lemma}
+    $\operatorname{Pin}_{n}(\mathbb{R})$ and $\operatorname{Spin}_{n}(\mathbb{R})$ are compact I.ie groups with
+    \begin{align*}
+        \operatorname{Pin}_{n}(\mathbb{R}) &=\left\{x_{1} \cdots x_{k} \mid x_{i} \in S^{n-1} \text { for } 1 \leq k \leq 2 n\right\} \\
+        \operatorname{Spin}_{n}(\mathbb{R}) &=\left\{x_{1} x_{2} \cdots x_{2 k} \mid x_{i} \in S^{n-1} \text { for } 2 \leq 2 k \leq 2 n\right\}
+    \end{align*}
+    and $\operatorname{Spin}_{n}(\mathbb{R})=\mathcal{A}^{-1}(S O(n))$.
+\end{lemma}
+
+\begin{theorem}
+    \begin{enumerate}
+        \item $\operatorname{Pin}_{n}(\mathbb{R})$ has two connected $(n \geq 2)$ components with $\operatorname{Spin}_{n}(\mathbb{R})=$ $\operatorname{Pin}_{n}(\mathbb{R})^{0}$.
+        \item $\operatorname{Spin}_{n}(\mathbb{R})$ is the connected $(n \geq 2)$ simply connected $(n \geq 3)$ two-fold cover of $S O(n) .$ The covering homomorphism is given by $\mathcal{A}$ with $\operatorname{ker} \mathcal{A}=\{\pm 1\}$, i.e., there is an exact sequence
+        \begin{equation*}
+            \{1\} \rightarrow\{\pm 1\} \rightarrow \operatorname{Spin}_{n}(\mathbb{R}) \stackrel{\mathcal{A}}{\rightarrow} S O(n) \rightarrow\{I\}
+        \end{equation*}
+    \end{enumerate}
+\end{theorem}
+
+\begin{proposition}
+    One can define the Lie algebra of $Spin_n(\mathbb{R})$ in terms of quadratic elements of the Clifford algebra, which is isomorphic to $\mathfrak{so}(n)$. \cite{cliffalg32:online}
+\end{proposition}
+
+\begin{remark}
+    $\mathfrak{so}(n)$ has a basis given by $L_{ij} = E_{ij} - E_{ji} \; (\forall i < j)$. $\exp \left(t L_{ij}\right) $ generates rotations in the $i-j$ plane.
+    \begin{equation*}
+        \left[L_{i j}, L_{k l}\right]=\delta_{i l} L_{k j}-\delta_{i k} L_{l j}+\delta_{j l} L_{i k}-\delta_{j k} L_{i l}.
+    \end{equation*}
+
+    The generators of $e_{i}$ of the Clifford algebra $C(n)$ satisfy the relations
+    \begin{equation*}
+        \left[\frac{1}{2} e_{i} e_{j}, \frac{1}{2} e_{k} e_{l}\right]=\delta_{i l}\left(\frac{1}{2} e_{k} e_{j}\right)-\delta_{i k}\left(\frac{1}{2} e_{l} e_{j}\right)+\delta_{j l}\left(\frac{1}{2} e_{i} e_{k}\right)-\delta_{j k}\left(\frac{1}{2} e_{i} e_{l}\right)
+    \end{equation*}
+    This shows that the vector space spanned by quadratic elements of $C(n)$ of the form $\frac{1}{2} e_{i} e_{j} \; (i<j)$, together with the operation of taking commutators, is isomorphic to the Lie algebra $\mathfrak{so}(n)$.
+
+    Since $\left(\frac{1}{2} e_{i} e_{j}\right)^{2}=-\frac{1}{4}$, the exponentials
+    \begin{equation*}
+        e^{t \left(\frac{1}{2} e_{i} e_{j}\right)}=\cos \left(\frac{t}{2}\right)+e_{i} e_{j} \sin \left(\frac{t}{2}\right)
+    \end{equation*}
+    $\mathcal{A} e^{t \left(\frac{1}{2} e_{i} e_{j}\right)}$ also generates rotations in the $i-j$ plane.
+
+    As we go around this circle in $Spin_n(\mathbb{R})$ once, we go around the the circle of $SO(n)$ rotations in the $i-j$ plane twice. This is a reflection of the fact that $Spin_n(\mathbb{R})$ is a double-covering of the group $SO(n)$.
+
+\end{remark}
+
+
+\nocite{Sepanski2007,Cohen1998}
+\bibliographystyle{plain}
+\bibliography{bib}
+
+\end{document}
