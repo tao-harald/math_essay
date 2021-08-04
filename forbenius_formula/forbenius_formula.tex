@@ -1,0 +1,271 @@
+\documentclass[11pt]{homework}
+\usepackage{ytableau}
+\usepackage{float}
+\title{Proof of Forbenius's Formula}
+\author{Tao Huang}
+\email{me@tau.ovh}
+
+\begin{document}
+    
+\maketitle
+
+To a partition $\lambda = (\lambda_1,\cdots, \lambda_k)$ of $d$ ($\sum_{i=1}^{k} \lambda_i = d$ and $\lambda_1 \geq \lambda_2 \geq \cdots \geq \lambda_k$) is associated to a \textit{Young diagram}  
+\begin{figure}[H]
+    \centering
+    \ydiagram{3,2,2,1}
+\end{figure}
+and also corresponding to an irreducible representation $V_\lambda$ of $\mathfrak{S}_d$ .
+% \footnote{$V_\lambda = A a_\lambda b_\lambda$ (for more detail refer to [Fulton \& Harris])}
+
+After numbering the box in Young diagram like 
+\begin{figure}[H]
+    \centering
+    \begin{ytableau}
+        1 & 2 & 3 \\
+        4 & 5 \\
+        6 & 7 \\
+        8
+    \end{ytableau}
+\end{figure}
+we may define a subgroup of $\mathfrak{S}_d$ :
+\begin{equation*}
+    P = P_\lambda = \{g\in \mathfrak{S}_d: g \text{ perserves each row}\}.
+\end{equation*}
+Note that
+\begin{equation*}
+    P_\lambda \cong \mathfrak{S}_\lambda \triangleq \mathfrak{S}_{\lambda_1} \times \cdots \times \mathfrak{S}_{\lambda_k}.
+\end{equation*}
+In group algebra $\mathbb{C} \mathfrak{S}_d$, there is an element corresponding to such subgroup 
+\begin{equation*}
+    a_\lambda = \sum_{g \in P} e_g.
+\end{equation*}
+
+
+Denote $C_\mathbf{i}$ the conjugacy class in $\mathfrak{S}_d$ determined by a sequence
+\begin{equation*}
+    \mathbf{i} = (i_1, \cdots, i_d) \quad \text{with} \sum \alpha i_\alpha = d,
+\end{equation*}
+where $C_\mathbf{i}$ consists of permutations having $i_1$ 1-cycle, $i_2$ 2-cycle, \textellipsis , and $i_d$ $d$-cycle. 
+
+Define \textit{power sums} $P_j(x), 1\leq j \leq d$ and the \textit{descriminant} $\Delta(x)$ by
+\begin{align*}
+    P_j(x) &= x_1^j + x_2^j + \cdots + x_k^j,\\
+    \Delta(x) &= \prod_{i < j} (x_i - x_j).
+\end{align*}
+
+For $f(x) = f(x_1,\cdots,x_k)$ a formal power series, $(l_1, \cdots, l_k)$ a $k$-tuple of non-negative integers, define
+\begin{equation*}
+    \left[f(x)\right]_{(l_1, \cdots, l_k)} = \text{ coeffcient of } x_1^{l_1}\cdot \ldots \cdot x_k^{l_k} \text{ in } f.
+\end{equation*}
+
+For given partition $\lambda = (\lambda_1,\cdots, \lambda_k)$ of $d$, set $
+l_1 = \lambda_1 + k - 1, l_2 = \lambda_2 + k - 2, \cdots, l_k = \lambda_k,$ which is a strictly decreasing sequence of $k$ non-negative integers.
+
+To compute the character of representation $V_\lambda$,
+\begin{theorem}[Forbenius's Formula]
+    \label{thm:forbenius}
+    \begin{equation*}
+        \chi_\lambda (C_\mathbf{i}) = \left[\Delta(x) \cdot P^{(\mathbf{i})}\right]_{(l_1, \cdots , l_k)},
+    \end{equation*}
+    where
+    \begin{equation*}
+        P^{(\mathbf{i})} = \prod_j P_j(x)^{i_j}.
+    \end{equation*}
+    % \begin{equation*}
+    %     P^{(\mathbf{i})} = (x_1 + \cdots + x_k)^{i_1} \cdot (x_1^2 + \cdots + x_k^2)^{i_2} \cdot \ldots \cdot (x_1^d + \cdots + x_k^d)^{i_d} = \prod_j P_j(x)^{i_j}.
+    % \end{equation*}
+\end{theorem}
+\begin{example}
+    If $d = 5, \lambda = (3,2)$, and $C_\mathbf{i}$ is the conjugacy class of $(123)(45)$, i.e. $\mathbf{i} = (0,1,1),$ then
+    \begin{equation*}
+        \chi_{(3,2)} (C_\mathbf{i}) = \left[(x_1 - x_2) \cdot (x_1^2 + x_2^2)(x_1^3 + x_2 ^3)\right]_{(4,2)} = 1.
+    \end{equation*}
+\end{example}
+
+
+% \begin{proposition}
+%     \label{lma:induced_rep}
+%     The representation $U_\lambda$ of $\mathfrak{S}_d$ induced from the trivial representation of $\mathfrak{S}_\lambda$.
+%     Set $A = \mathbb{C} \mathfrak{S}_d$, we have
+%     \begin{equation*}
+%         U_\lambda = A a_\lambda.
+%     \end{equation*}
+% \end{proposition}
+
+% \begin{corollary}
+%     \begin{equation*}
+%         V_\lambda \subset U_\lambda.
+%     \end{equation*}
+% \end{corollary}
+
+\begin{lemma}
+    \label{lma:induced_trivial}
+    Let $W$ be the trivial representation of $H$, which is a subgroup of $G$, then for conjugacy class $C$ of $G$, 
+    \begin{equation*}
+        \chi_{\operatorname{Ind} W}(C) = \frac{[G:H]}{|C|} \cdot |C\cap H|
+    \end{equation*}
+\end{lemma}
+
+\begin{proposition}
+    \label{prop:psi}
+    % \label{lma:psi}
+    Set $U_\lambda$ the representation of $\mathfrak{S}_d$ induced from the trivial representation of $\mathfrak{S}_\lambda$.
+    Let $\psi_{\lambda} = \chi_{U_\lambda}$  the character of $U_\lambda$, we have
+    \begin{equation*}
+        \psi_{\lambda}(C_\mathbf{i}) = \left[P^{(\mathbf{i})}\right]_\lambda.
+    \end{equation*}
+    %     \quad \text{(coefficient of $X^\lambda$ in $P^{(\mathbf{i})}$)},
+    % \end{equation*}
+    % where 
+    % $X^{\lambda} = x_1 ^{\lambda_1} \cdots x_k ^{\lambda_k}$.
+\end{proposition}
+
+\begin{lemma}
+    \label{lma:sym_poly}
+    For any symmetric polynomial $P$,
+    \begin{equation*}
+        \left[P\right]_\lambda = \sum_{\mu} K_{\mu \lambda} \left[\Delta(x) \cdot P \right]_{(\mu_1 + k - 1, \mu_2 + k - 2, \cdots , \mu_k)},
+    \end{equation*}
+    where $K_{\mu\lambda}$ is the Kostka numbers.
+\end{lemma}
+
+\begin{lemma}
+    \label{lma:kostka}
+    \begin{equation*}
+        K_{\lambda \lambda} = 1 , \quad \text{ and } K_{\mu \lambda} = 0 \text{ for } \mu < \lambda.
+    \end{equation*}
+\end{lemma}
+
+\begin{proposition}
+    \label{prop:psi_omega}
+    \begin{equation*}
+        \psi_{\lambda}(C_\mathbf{i}) = \sum_{\mu} K_{\mu\lambda} \omega_\mu(\mathbf{i}) = \omega_\lambda(\mathbf{i}) + \sum_{\mu > \lambda} K_{\mu\lambda} \omega_\mu(\mathbf{i}) ,
+    \end{equation*}
+    where
+    \begin{equation*}
+        \omega_\mu(\mathbf{i}) = \left[\Delta \cdot P^{(\mathbf{i})}\right]_{(\mu_1 + k - 1, \mu_2 + k - 2, \cdots , \mu_k)}.
+    \end{equation*}
+\end{proposition}
+
+\begin{lemma}
+    \label{lma:omega}
+    \begin{equation*}
+        \frac{1}{d!}\sum_{\mathbf{i}} |C_\mathbf{i}|\omega_\lambda(\mathbf{i}) \omega_\mu (\mathbf{i}) = \delta_{\lambda \mu}.
+    \end{equation*}
+\end{lemma}
+
+\begin{proposition}
+    \label{prop:final}
+    \begin{equation*}
+        \chi_\lambda (C_\mathbf{i}) = \omega_\lambda(\mathbf{i}).
+    \end{equation*}
+\end{proposition}
+
+% \begin{proof}[proof of proposition \ref{lma:induced_rep}]
+%     \begin{equation*}
+%         U_\lambda = \mathbb{C} \mathfrak{S}_d \otimes _{\mathbb{C} \mathfrak{S}_\lambda } U
+%     \end{equation*}
+%     where $U$ is the trivial representation of $\mathfrak{S}_\lambda$.
+
+%     On the left hand, $\forall g \in  \mathfrak{S}_d, e_h \otimes u \in \mathbb{C} \mathfrak{S}_d \otimes _{\mathbb{C} \mathfrak{S}_\lambda } U$, write $gh = \sigma f$ where $\sigma \in \mathfrak{S}_d / \mathfrak{S}_\lambda$ and $f \in \mathfrak{S}_\lambda$, we have
+%     \begin{equation*}
+%         g . e_h \otimes u = e_{gh} \otimes u = e_{\sigma} \otimes u.
+%     \end{equation*}
+
+%     On the right hand, $e_h a_\lambda \in A a_\lambda$, 
+%     \begin{equation*}
+%         g . e_h a_\lambda = e_{gh} a_\lambda = e_{\sigma} a_\lambda.
+%     \end{equation*}
+% \end{proof}
+
+\begin{proof}[\normalfont\bfseries Proof of Lemma \ref{lma:induced_trivial}]
+    
+    \begin{align*}
+        \chi_{\operatorname{Ind} W}(C) &= \frac{1}{|C|} \sum_{c \in C} \chi_{\operatorname{Ind} W}(c) \\
+        &= \frac{1}{|C|} \sum_{c \in C} \sum_{\substack{g \in G/H \\ g c g^{-1} \in H}} \chi_{W}(g c g^{-1}) \\
+        &= \frac{1}{|C|} \sum_{c \in C} \frac{1}{|H|} \sum_{\substack{g \in G\\ g c g^{-1} \in H}} \chi_{W}(g c g^{-1})\\
+        &= \frac{1}{|C| |H|} \#\{ c \in C, g \in G \mid g c g^{-1} \in H \} \\
+        &= \frac{1}{|C| |H|} \#\{ c \in C, g \in G \mid g c g^{-1} \in C\cap H \} \\
+        &= \frac{|G|}{|H|} \frac{|C\cap H|}{|C|} = \frac{[G:H]}{|C|} \cdot |C\cap H|.
+    \end{align*}
+\end{proof}
+
+\begin{proof}[\normalfont\bfseries Proof of Proposition \ref{prop:psi}]
+    \begin{align*}
+        |C_\mathbf{i}| &= \frac{d!}{1^{i_1}i_1! \cdot 2^{i_2}i_2! \cdot \ldots \cdot d^{i_d} i_d! }; \\
+        |C_\mathbf{i} \cap \mathfrak{S}_\lambda| &= \sum_{\{r_{pq}\}} \prod_{p=1}^k \frac{\lambda_p !}{1^{r_{p1}}r_{p1}! \cdot 2^{r_{p2}}r_{p2}! \cdot \ldots \cdot d^{r_{pd}}r_{pd}!} \\
+        (\text{sum over } & i_q = r_{1q} + \cdots + r_{kq}, \lambda_p = 1 \cdot r_{p1} + 2 \cdot r_{p2} + \cdots + d \cdot r_{pd});\\
+        \text{By lemma \ref{lma:induced_trivial}, }\\
+        \psi_{\lambda}(C_\mathbf{i}) &= \frac{[\mathfrak{S}_d:\mathfrak{S}_\lambda]}{|C_\mathbf{i}|} \cdot |C_\mathbf{i} \cap \mathfrak{S}_\lambda|\\
+        &= \frac{d!}{\lambda_1!\cdots\lambda_k!} \cdot \frac{1^{i_1}i_1! \cdot 2^{i_2}i_2! \cdot \ldots \cdot d^{i_d} i_d!}{d!} \cdot \sum_{\{r_{pq}\}} \prod_{p=1}^k \frac{\lambda_p !}{1^{r_{p1}}r_{p1}! \cdot 2^{r_{p2}}r_{p2}! \cdot \ldots \cdot d^{r_{pd}}r_{pd}!} \\
+        &= \sum_{\{r_{pq}\}} \frac{1^{i_1}i_1! \cdot 2^{i_2}i_2! \cdot \ldots \cdot d^{i_d} i_d!}{\lambda_1!\cdots\lambda_k!} \cdot  \prod_{p=1}^k \frac{\lambda_p !}{1^{r_{p1}}r_{p1}! \cdot 2^{r_{p2}}r_{p2}! \cdot \ldots \cdot d^{r_{pd}}r_{pd}!}\\
+        &= \sum_{\{r_{pq}\}} i_1! \cdot i_2! \cdot \ldots \cdot  i_d! \cdot  \prod_{p=1}^k \frac{1}{r_{p1}! \cdot r_{p2}! \cdot \ldots \cdot r_{pd}!}\\
+        &= \sum_{\{r_{pq}\}} \prod_{q=1}^d \left(i_q! \prod_{p=1}^k  \frac{1}{r_{pq}!}\right)\\
+        &= \sum_{\{r_{pq}\}} \prod_{q=1}^d \frac{i_q!}{r_{1q}! \cdot \ldots \cdot r_{kq}!}
+    \end{align*}
+    As 
+    \begin{equation*}
+        P^{(\mathbf{i})} = (x_1 + \cdots + x_k)^{i_1} \cdot (x_1^2 + \cdots + x_k^2)^{i_2} \cdot \ldots \cdot (x_1^d + \cdots + x_k^d)^{i_d},
+    \end{equation*}
+    $\frac{i_q!}{r_{1q}! \cdot \ldots \cdot r_{kq}!}$ equals to how many ways to gain $\prod_{p=1}^k x_p^{q \cdot r_{pq}}$ in $(x_1^q + \cdots + x_k^q)^{i_q}$, i.e. 
+    \begin{equation*}
+        \left[(x_1^q + \cdots + x_k^q)^{i_q}\right]_{(q\cdot r_{pq})_{p=1}^k},
+    \end{equation*}
+    and 
+    \begin{equation*}
+        \prod_{q=1}^d \prod_{p=1}^k x_p^{q \cdot r_{pq}} = \prod_{p=1}^k x_p^{\sum_{q=1}^d q \cdot r_{pq}} = \prod_{p=1}^k x_p^{\lambda_p} = X^{\lambda}.
+    \end{equation*}
+    Different $\{r_{pq}\}$ corresponding to different ways to split $X^{\lambda}$ into $\{(x_1^q + \cdots + x_k^q)^{i_q}\}_{q=1}^d$.
+    Therefore 
+    \begin{equation*}
+        \psi_{\lambda}(C_\mathbf{i}) = \sum_{\{r_{pq}\}} \prod_{q=1}^d \frac{i_q!}{r_{1q}! \cdot \ldots \cdot r_{kq}!} = \left[P^{(\mathbf{i})}\right]_\lambda.
+    \end{equation*}
+\end{proof}
+
+\begin{proof}[\normalfont\bfseries Proof of Proposition \ref{prop:psi_omega}]
+    By proposition \ref{prop:psi}, lemma \ref{lma:sym_poly} and lemma \ref{lma:kostka}, 
+    \begin{align*}
+        \psi_{\lambda}(C_\mathbf{i}) &= \left[P^{(\mathbf{i})} \right]_\lambda \\
+        &= \sum_{\mu} K_{\mu \lambda} \left[\Delta(x) \cdot P^{(\mathbf{i})} \right]_{(\mu_1 + k - 1, \mu_2 + k - 2, \cdots , \mu_k)} \\
+        &= \sum_{\mu} K_{\mu\lambda} \omega_\mu(\mathbf{i}) \\
+        &= \omega_\lambda(\mathbf{i}) + \sum_{\mu > \lambda} K_{\mu\lambda} \omega_\mu(\mathbf{i}) ,
+    \end{align*}
+\end{proof}
+
+\begin{proof}[\normalfont\bfseries Proof of Proposition \ref{prop:final}]
+    Note that
+    \begin{equation*}
+        V_{\lambda} = \mathbb{C} \mathfrak{S}_d \cdot a_\lambda b_\lambda, \quad U_\lambda = \mathbb{C} \mathfrak{S}_d \cdot a_\lambda.
+    \end{equation*}
+    Hence $V_\lambda \subseteq U_\lambda$ and $U_\lambda$ can then be decomposed with:
+    \begin{equation}
+        \label{eqn:psi_decomp}
+        \psi_\lambda = \sum_{\mu} n_{\lambda \mu} \chi_{\mu}, \quad n_{\lambda \lambda} \geq 1, n_{\lambda \mu} \in \mathbb{N}.
+    \end{equation}
+    $\omega_\lambda$ is a class function, then
+    \begin{equation*}
+        \omega_\lambda = \sum_{\mu} m_{\lambda \mu} \chi_{\mu}, \quad  m_{\lambda \mu} \in \mathbb{Z}.
+    \end{equation*}
+    By lemma \ref{lma:omega}, $\omega_\lambda$ are orthonormal. Hence 
+    \begin{equation*}
+        1 = (\omega_\lambda, \omega_\lambda) = \sum_{\mu} m_{\mu \lambda}^2,
+    \end{equation*}
+    so $\omega_\lambda = \pm \chi_\mu$ for somme $\mu$.
+
+    Proof by induction: 
+    First, for $\lambda = (d)$, $\psi_\lambda = \omega_\lambda$.
+    By equation \ref{eqn:psi_decomp}, we have $\omega_\lambda = \chi_\lambda$.
+
+    Then, assume $\chi_\mu = \omega_\mu$ for all $\mu > \lambda$, we have
+    \begin{equation*}
+        \psi_\lambda = \omega_\lambda + \sum_{\mu > \lambda} K_{\mu \lambda} \chi_{\mu}.
+    \end{equation*}
+    By equation \ref{eqn:psi_decomp}, $\omega_\lambda = \chi_\lambda$. 
+\end{proof}
+
+Theorem \ref{thm:forbenius} is equivalent to proposition \ref{prop:final}. Therefore we have finished the proof of Forbenius's formula. 
+
+Lemma \ref{lma:sym_poly}, \ref{lma:kostka} and \ref{lma:omega} are results from symmetric polynomials which won't be proved here.
+
+
+\end{document}
