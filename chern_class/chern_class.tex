@@ -1,0 +1,195 @@
+\documentclass[11pt]{homework}
+\usepackage{quiver}
+
+\title{Chern Class}
+\author{Tao Huang}
+\email{me@tau.ovh}
+
+\begin{document}
+    
+\maketitle
+
+All cohomology groups are with integer coefficients without notation. 
+
+\section{Via an Euler class}
+\begin{theorem}[Thom isomorphism]
+    Let $\pi:E\rightarrow B$ be an oriented rank $n$ real vector bundle. Then the cohomology group $H^{i}\left(E, E_{0}\right)$ is zero for $i<n$, and $H^{n}\left(E, E_{0}\right)$ contains one and only one cohomology class $u$ whose restriction
+    \begin{equation*}
+        u \vert_{\left(F, F_{0}\right)} \in H^{n}\left(F, F_{0}\right)
+    \end{equation*}
+    is equal to the preferred generator $u_{F}$ for every fiber $F$. Furthermore the correspondence $y \mapsto y \smile u$ maps $H^{k}(E)$ isomorphically onto $H^{k+n}\left(E, E_{0}\right)$ for every integer $k$.
+\end{theorem} 
+\begin{definition}
+    The inclusion $(B,\emptyset )\hookrightarrow (E,\emptyset )\hookrightarrow (E, E_{0})$ induce maps
+    \begin{equation*}
+        H^{r}(E,E_{0})\to H^{r}(E)\to H^{r}(B).
+    \end{equation*}
+    The \textit{Euler class} $e(E) \in H^n(B)$ is the image of $u$ under the composition of these maps.
+\end{definition}
+Note that since $E$ and $B$ are homotopic, $H^{k}(E) \cong H^{k}(B)$.
+\begin{proposition}[Gysin sequence]
+    \label{prop:gysin}
+    Ther is a long exact sequence:
+    \begin{equation*}
+        \cdots \rightarrow H^{k+n-1}(E_0) \rightarrow H^{k}(B) \xrightarrow{\smile e} H^{k+n}(B) \xrightarrow{\pi_0^*} H^{k+n}(E_0) \rightarrow \cdots.
+    \end{equation*}
+\end{proposition}
+\begin{proof}
+    By long exact sequence:
+    \begin{equation*}
+        \cdots \rightarrow H^{r-1}(E_0) \rightarrow H^{r}(E, E_0) \rightarrow H^{r}(E) \rightarrow H^{r}(E_0) \rightarrow \cdots.
+    \end{equation*}
+    Then the following diagram commutes:
+    \[\begin{tikzcd}
+        {H^{k+n}(E,E_0)} &&&& {H^{k+n}(E)} && {H^{k+n}(E_0)} \\
+        & {H^k(E)} &&& {} \\
+        && {H^k(B)} && {H^{k+n}(B)}
+        \arrow["{\pi_0^*}"', from=3-5, to=1-7]
+        \arrow[from=1-5, to=1-7]
+        \arrow["{\pi^*}", from=3-5, to=1-5]
+        \arrow["{\smile e(E)}", from=3-3, to=3-5]
+        \arrow[from=1-1, to=1-5]
+        \arrow["\cong"', from=2-2, to=3-3]
+        \arrow["\cong"', from=1-1, to=2-2]
+    \end{tikzcd}\]
+\end{proof}
+
+\begin{corollary}
+    Let $\pi : E\to B$ be a rank $n$ complex vector bundle, there is an isomorphism:
+    \begin{equation*}
+        H^{k}(B) \xrightarrow[\cong]{\pi_0^*} H^{k}(E_0),
+    \end{equation*}
+    for $k<2n-1$.
+\end{corollary}
+\begin{proof}
+    $H^{k-2n}(B) \cong H^{k-2n+1}(B) \cong 0$. Together with proposition \ref{prop:gysin}.
+\end{proof}
+
+\begin{definition}
+    Let $\pi : E\to B$ be a rank $n$ complex vector bundle over a paracompact space $B$. \textit{Chern class} $c_{k}(E) \in H^{2k}(B_{\mathbb {R}})$ is given by
+    \begin{equation*}
+        c_{k}(E)=\begin{cases}
+            {\pi_0^{*}}^{-1}c_{k}(E')&k<n\\
+            e(E_{\mathbb {R} })&k=n\\
+            0&k>n
+        \end{cases},
+    \end{equation*}
+    where $E' \rightarrow E_0$ is a vector bundle whose fiber on each point $v\in E_0$ is the quotient space $E / \mathbb{C}\{v\}$, whence $E'$ is a rank $n-1$ complex vector bundle.
+\end{definition}
+
+
+\section{via Chern–Weil theory}
+\subsection{Curvature from}
+Let $\pi: E\to M$ be a smooth rank $n$ complex vector bundle over a differentiable manifold $M$. Denote the space of smooth sections of $E$ over $M$ by $\Gamma(M,E)$. 
+
+\begin{definition}
+    We call any section of $\wedge^k T^*M \otimes E$ an \textit{$E$-valued $k$-form} on $M$. The set of $E$-valued $k$-forms $\Gamma (M, \wedge^k T^{*}M\otimes E)$ is denoted by $\Omega^k(M;E)$
+\end{definition}
+
+\begin{definition}
+    A \textit{connection} on E is an $\mathbb {C}$-linear map
+    \begin{equation*}
+        \nabla :\Omega^0(M;E)\to \Omega^1(M;E)
+    \end{equation*}
+    such that the Leibniz rule
+    \begin{equation*}
+        \nabla (fs)=\mathrm{d}f\otimes s+f\nabla s
+    \end{equation*}
+    holds for all smooth functions $f$ on $M$ and all smooth sections $s$ of $E$.
+
+    Let $X$ be a tangent vector field on $M$, one can define a \textit{covariant derivative along} $X$
+    \begin{equation*}
+        \nabla _{X}:\Omega^{0}(M;E)\to \Omega^{0}(M;E),
+    \end{equation*}
+    by contracting $X$ with the resulting covariant index in the connection: $\nabla _{X}(s)=(\nabla (s))(X)$. 
+\end{definition}
+
+\begin{definition}
+    Let $\varphi_U: U \times \mathbb{C}^n \rightarrow \pi^{-1}(U)$ be local trivializations of $E$. A set of local sections $\{s_1, s_2, \cdots, s_n\}$ is said to be basis of $\Gamma(U,\pi^{-1}(U))$ if for all point $p \in U, \{s_1(p), s_2(p), \cdots, s_n(p)\}$ is a basis for the fiber $E_p$. Such $\{s_1, s_2, \cdots, s_n\}$ is called \textit{local frame} of $E$ over $U$.
+\end{definition}
+
+\begin{definition}
+    For the given connection $\nabla$ and local frame $\{s_1, s_2, \cdots, s_n\}$ on $U$, we can write:
+    \begin{equation*}
+        \nabla_X s_i = \sum_j \left(\omega_U\right)_{i,j}(X) s_j,
+    \end{equation*}
+    for all vector field $X$ over $U$, where $\omega_U \in \Omega^1(M;\mathfrak{gl}(n;\mathbb{C}))$, called \textit{connection $1$-form} associated to the given local frame.
+\end{definition}
+ 
+\begin{definition}
+    Let $\nabla$ be the given connection on $E$, one can extend $\nabla$ to a family of operators:
+    \begin{equation*}
+        \nabla : \Omega^{k}(M;E)\to \Omega^{k+1}(M;E),
+    \end{equation*}
+    by defining
+    \begin{equation*}
+        \nabla (\omega \otimes s) = \mathrm{d} \omega \otimes s + (-1)^k \omega \wedge \nabla s,
+    \end{equation*}
+    for all $\omega \in \Omega^{k}(M), s\in \Omega^{0}(M;E)$
+\end{definition}
+
+\begin{definition}
+    We call $R_\nabla = \nabla^2: \Omega^0(M;E)\to \Omega^2(M;E)$ the \textit{curvature tensor} of the connection $\nabla$. In local frame:
+    \begin{equation*}
+        \nabla^2 s_i (X,Y) = \sum_j \left(\Omega_U\right)_{i,j}(X, Y) s_j,
+    \end{equation*}
+    where $\Omega_U \in \Omega^2(M;\mathfrak{gl}(n;\mathbb{C}))$ is called \textit{curvature 2-form}.
+\end{definition}
+
+\subsection{Invariant polynomial}
+
+\begin{proposition}
+    For the given vector space $V$, there is a bijection $\mathrm{Sym}^k V^*$ and homogeneous polynomial of degree $k$:
+    \begin{equation*}
+        T \xmapsto{\cong} P_T := \left(v \mapsto T(v,\cdots,v)\right).
+    \end{equation*}
+\end{proposition}
+\begin{proof}
+    Just notice the \textit{polarization formula}:
+    \begin{equation*}
+        T(v_1, \cdots, v_k) = \frac{1}{k!}\frac{\partial^k}{\partial t_1 \cdots \partial t_k} P_T(t_1 v_1 + \cdots + t_k v_k).
+    \end{equation*}
+\end{proof}
+
+In general, let $G = GL(n;\mathbb{C})$ and $\mathfrak{g} = \mathfrak{gl} (n;\mathbb{C})$.
+
+\begin{definition}
+    A symmetric $k$-tensor $T \in \mathrm{Sym}^k \mathfrak g^*$ is called \textit{$G$-invariant} if 
+    \begin{equation*}
+        g \cdot T = T \quad \forall g \in G.
+    \end{equation*}
+    The set of all $G$-invariant symmetric $k$-tensor is denoted by $I^k(G)$.
+\end{definition}
+
+\begin{theorem}[Chevally restriction theorem]
+    Let $G$ be a complex semi-simple Lie group, $\mathfrak{g}$ the corresponding Lie algebra, $\mathfrak{h}$ the Cartan subalgebra and $W$ the Weyl group of $\mathfrak{g}$. 
+    Then $G$-invariant polynomial on $\mathfrak{g}$ is isomorphic to $W$-invariant polynomial on $\mathfrak{h}$. 
+    % Denote $\mathbb{C} [\mathfrak{g}]^G$ the $G$-invariant polynomial on $\mathfrak{g}$ and $\mathbb{C} [\mathfrak{h}]^W$ the $W$-invariant polynomial on $\mathfrak{h}$. Then
+    % \begin{equation*}
+    %     \mathbb{C} [\mathfrak{g}]^G \cong \mathbb{C} [\mathfrak{h}]^W.
+    % \end{equation*} 
+\end{theorem}
+
+\subsection{Chern-Weil theory}
+
+\begin{theorem}
+    Let $E$ be a vector bundle over $M .$ Then
+    \begin{enumerate}
+        \item For any $T \in I^{k}(G)$ and any linear connection $\nabla$ on $E, P_{T}\left(R_{\nabla}\right)$ is a closed $2 k$-form.
+        \item The de Rham cohomology class $\left[P_{T}\left(R_{\nabla}\right)\right] \in H_{d R}^{2 k}(M)$ is independent of the choices of $\nabla$.
+        \item The Chern-Weil maps
+        \begin{equation*}
+            \mathcal{C W}:\left(I^{*}(G), \circ\right) \rightarrow\left(H_{dR}^{*}(M), \wedge\right), \quad T \mapsto\left[P_{T}\left(R_{\nabla}\right)\right]
+        \end{equation*}
+        is a ring homomorphism, which is called \textit{Chern-Weil homomorphism}.
+    \end{enumerate}
+\end{theorem}
+
+\begin{definition}
+    For the given $G$-invariant polynomial $f$ of degree $k$, since the cohomology class $\left[f(\Omega)\right] \in H_{dR}^{2k}(M)$ does not depend on connections $\Omega$, we will denote it by $f(E)$ and call it the \textit{characteristic class} of $E$ corresponding to $f$. The \textit{total Chern class} $c(E)$ is defined by:
+    \begin{equation*}
+        \left[\det \left(I - \frac{1}{2\pi i}\Omega\right)\right] = 1 + \sum_{k=1}^n \left(\frac{-1}{2 \pi i}\right)^k \sigma_k (\Omega).
+    \end{equation*}
+\end{definition}
+
+\end{document}
