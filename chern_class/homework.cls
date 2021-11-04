@@ -16,10 +16,10 @@
 \LoadClass{article}
 
 
-\RequirePackage[margin=1in]{geometry}
+\RequirePackage[margin=1.5in]{geometry}
 \RequirePackage{hyperref}
 \RequirePackage{amsmath,amsfonts,amssymb,amsthm,mathtools,thmtools}
-% \RequirePackage{kpfonts}
+\RequirePackage[nomath]{kpfonts}
 \RequirePackage{tikz}
 \RequirePackage{xparse}
 \RequirePackage{sectsty}
@@ -30,7 +30,7 @@
 
 \allowdisplaybreaks
 
-% \colorlet{maincolor}{green!50!black}
+% \colorlet{maincolor}{green!30!black}
 % \colorlet{secondcolor}{cyan!70!black}
 \colorlet{maincolor}{black}
 \colorlet{secondcolor}{black}
@@ -59,7 +59,7 @@
 \newtheorem{conjecture}[theorem]{Conjecture} %
 \theoremstyle{remark} %
 \newtheorem{example}[theorem]{Example} %
-\newtheorem*{remark}{Remark} %
+\newtheorem{remark}[theorem]{Remark} %
 \newtheorem{note}[theorem]{Note} %
 \newtheorem{case}[theorem]{Case} %
 \newtheorem*{solution}{Solution} %
