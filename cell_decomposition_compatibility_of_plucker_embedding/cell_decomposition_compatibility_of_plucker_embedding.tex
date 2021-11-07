@@ -1,0 +1,112 @@
+\documentclass[11pt]{homework}
+
+\title{Cell Decomposition Compatibility of Plücker Embedding}
+\author{Tao Huang}
+\email{me@tau.ovh}
+
+\begin{document}
+
+\maketitle
+
+
+The decomposition of the Grassmannian into Schubert cells is compatible. 
+
+\begin{example}
+    The Grassmannian $G(2, 4)$, has a decomposition into six Schubert cells $C_{\left(j_{1}, j_{2}\right)}$, with
+    \begin{equation*}
+        \left(j_{1}, j_{2}\right) \in\{(1,2),(1,3),(1,4),(2,3),(2,4),(3,4)\}
+    \end{equation*}
+    which are, respectively, of complex dimensions $0,1,2,2,3,4$, and correspond to $2 \times 4$-matrices in row echelon form. In terms of the Plücker embedding $G(2, 4) \hookrightarrow \mathbb{P}^{5}$, if we write the defining equation for $G(2, 4)$ in $\mathbb{P}^{5}$ as above, in the form
+    \begin{equation*}
+        \Lambda^{(12)} \Lambda^{(34)}-\Lambda^{(13)} \Lambda^{(24)}+\Lambda^{(23)} \Lambda^{(14)}=0
+    \end{equation*}
+    then the Schubert varieties $X_{\left(j_{1}, j_{2}\right)}$ given by the closures of the Schubert cells $C_{\left(j_{1}, j_{2}\right)}$, are given by
+    \begin{align*}
+        X_{(1,2)}&=\left\{V \in G(2, 4) \, \middle | \, \Lambda^{(13)}=\Lambda^{(14)}=\Lambda^{(23)}=\Lambda^{(24)}=\Lambda^{(34)}=0\right\} \\
+        X_{(1,3)}&=\left\{V \in G(2, 4) \, \middle | \, \Lambda^{(14)}=\Lambda^{(23)}=\Lambda^{(24)}=\Lambda^{(34)}=0\right\} \\
+        X_{(1,4)}&=\left\{V \in G(2, 4) \, \middle | \, \Lambda^{(23)}=\Lambda^{(24)}=\Lambda^{(34)}=0\right\} \\
+        X_{(2,3)}&=\left\{V \in G(2, 4) \, \middle | \, \Lambda^{(14)}=\Lambda^{(24)}=\Lambda^{(34)}=0\right\} \\
+        X_{(2,4)}&=\left\{V \in G(2, 4) \, \middle | \, \Lambda^{(34)}=0\right\}
+    \end{align*}
+    with $X_{(3,4)}=G(2, 4) .$ The deformation described above then induces compatible noncommutative deformations on all the Schubert cells. 
+\end{example}
+
+
+% For any two ordered sequences:
+% \begin{equation*}
+%     i_{1}<i_{2}<\cdots <i_{k-1},\quad j_{1}<j_{2}<\cdots <j_{k+1}
+% \end{equation*}
+% of positive integers $1\leq i_{l},j_{m}\leq n$, the following homogeneous equations are valid, and determine the image of W under the Plücker map:
+% \begin{equation*}
+%     \sum _{l=1}^{k+1}(-1)^{l}W_{i_{1},\dots ,i_{k-1},j_{l}}W_{j_{1},\dots ,{\hat {j}}_{l},\dots j_{k+1}}=0.
+% \end{equation*}
+
+
+\begin{proposition}[Plücker relation]
+    Let $q$ be an integer $1\leq q \leq k$\footnote{when $q=k$, the relation is trivial.}.
+    Fix two length $k$ sequences $I,J\subseteq \{1,2,\cdots,n\}$ and length $q$ sequence $R \subseteq \{1,2,\cdots,n\}$;
+    \begin{align*}
+        I: i_1 < i_2 < \cdots < i_k;\\
+        J: j_1 < j_2 < \cdots < j_k;\\
+        R: r_1 < r_2 < \cdots < r_q.
+    \end{align*}
+    If $S\subseteq \{1,2,\cdots,k\}$is a length $q$ sequence, say $S: s_1 < s_2 < \cdots < s_q$; let $T^\prime$ be obtained from $I$ by replacing $(i_{r_1}, i_{r_2}, \cdots, r_{r_q})$ with $(j_{s_1}, j_{s_2}, \cdots, j_{s_q})$ and likewise $J^\prime$ from $J$ by replacing $(j_{s_1}, j_{s_2}, \cdots, j_{s_q})$ with $(i_{r_1}, i_{r_2}, \cdots, r_{r_q})$.
+    Then we have the Plücker relation
+    \begin{equation*}
+        \Lambda^I \Lambda^J = \sum_S \Lambda^{I^\prime} \Lambda^{J^\prime},
+    \end{equation*}
+    where sum is quantified over all increasing length $q$ sequences $S\subseteq \{1,2,\cdots,k\}$.
+\end{proposition}
+
+\section{$G(2,n)$}
+Take $G(2,n)$ for example, Schubert cells $C_{(j_1,j_2)}$ can be listed (in order) in the form
+\begin{equation*}
+    \begin{Bmatrix}
+        (1,2) & (1,3) & (1,4) & \cdots & (1,n)\\
+              & (2,3) & (2,4) & \cdots & (2,n)\\
+              &       & (3,4) & \cdots & (3,n)\\
+              &       &       & \ddots & \vdots\\
+              &       &       &        & (n-1,n)\\
+    \end{Bmatrix}.
+\end{equation*}
+Note that cells $C_{(j_1,j_2)}$ has dimension $m-3$ and variety
+\begin{equation*}
+    X_{(j_1,j_2)} = \left\{V \in G(2, n) \, \middle | \, \Lambda^{(a,b)}=0, \forall a > j_1 \text{ or } b > j_2 \right\}
+\end{equation*}
+has dimension $\frac{\left(2j_2-j_1-1\right)j_1}{2}$.
+
+In such order, $\mathbb{C}^{\binom{n}{2}}$ has variety
+\begin{equation*}
+    Y_{(j_1,j_2)} = \left\{ v \in \mathbb{C}^{\binom{n}{2}} \, \middle | \, v_{(a,b)} = 0, \forall a > j_1 \text{ or } a = j_1 \text{ and } b > j_2 \right\}.
+\end{equation*}
+It suffices to prove $\Lambda^{(a,b)}=0$ for all $a\leq j_1$ and $b > j_2$:
+Since $a\leq j_1 < j_2 < b$ and 
+\begin{align*}
+    \Lambda^{(j_1,j_2)} \Lambda^{(a,b)} &= \Lambda^{(j_1,a)} \Lambda^{(j_2,b)} + \Lambda^{(j_1,b)} \Lambda^{(a,j_2)} \\
+    &= - \Lambda^{(a,j_1)} \Lambda^{(j_2,b)} + \Lambda^{(a,j_2)} \Lambda^{(j_1,b)} \\
+    &= - \Lambda^{(a,j_1)} 0 + \Lambda^{(a,j_2)} 0 \\
+    &= 0.
+\end{align*}
+Then $\Lambda^{(a,b)}=0$.
+
+
+\section{$G(k,n)$}
+For $G(k,n)$, Schubert variety 
+\begin{equation*}
+    X_{(j_1,j_2, \cdots, j_k)} = \left\{V \in G(k, n) \, \middle | \, \Lambda^{(a_i)_{i}}=0, \forall (a_i)_{i=1,2,\cdots,k}, \text{s.t. } a_i > j_i \text{ for some } i \right\},
+\end{equation*}
+and variety
+\begin{equation*}
+    Y_{(j_1,j_2, \cdots, j_k)} = \left\{ v \in \mathbb{C}^{\binom{n}{k}} \, \middle | \, v_{(a_i)_{i}} = 0, \forall (a_i)_{i=1,2,\cdots,k}, \text{s.t. } a_i > j_i \text{ and } a_l = j_l (\forall l < i) \text{ for some } i \right\}.
+\end{equation*}
+
+It suffices to prove $\Lambda^{(a_1, a_2, \cdots, a_k)} = 0 $, for all $(a_1, a_2, \cdots, a_k)$, s.t. $a_l \leq j_l (\forall l < i)$ and $a_i > j_i$ for some $i$.
+
+By induction, assume such equation for $i^\prime = i - 1$ is true (when $i^\prime = 1$, it's clearly true).
+\begin{align*}
+    \Lambda^{(j_1,j_2, \cdots, j_k)} \Lambda^{(a_1, a_2, \cdots, a_k)} =& \sum_{l=1}^{k} \Lambda^{(j_1,j_2, \cdots, j_{i-1}, a_{l}, j_{i+1}, \cdots, j_k)} \Lambda^{(a_1, a_2, \cdots, j_i, \cdots, a_k)}\\
+    =& \sum_{l=1}^{i-1} \Lambda^{(j_1,j_2, \cdots, j_{i-1}, a_{l}, j_{i+1}, \cdots, j_k)} \underbrace{\Lambda^{(a_1, a_2, \cdots, a_{l-1}, a_{l+1}, \cdots, a_{i-1}, \underbrace{j_i}_{(i-1)_{\text{th}} \text{ element}}, a_i, \cdots, a_k)}}_{=0 \text{ since } a_{i-1} \leq j_{i-1} < j_i < a_i \text{ and } j_i > j_{i-1}}   \\ 
+    &+ \sum_{l=i}^{k} \underbrace{\Lambda^{(j_1,j_2, \cdots, j_{i-1}, a_{l}, j_{i+1}, \cdots, j_k)}}_{=0 \text{ since } a_l \geq a_i > j_l} \Lambda^{(a_1, a_2, \cdots, j_i, \cdots, a_k)}\\
+    =&0.
+\end{align*}
+\end{document}
